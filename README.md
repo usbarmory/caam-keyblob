@@ -83,7 +83,7 @@ ioctl(file, mode, (caam_kb_data *) kb)
 The mode can be either `CAAM_KB_ENCRYPT` or `CAAM_KB_DECRYPT` to respectively
 select AES-256 encryption or decryption with CBC-MAC (CCM). The mode values and
 the `caam_kb_data` structure format are defined in
-[caam_keyblob.h](https://github.com/inversepath/caam-keyblob/blob/master/caam_keyblob.h)
+[caam_keyblob.h](https://github.com/inversepath/caam-keyblob/blob/master/caam_keyblob.h).
 
 The following steps, all taken internally within the CAAM, describe the
 encryption operation:

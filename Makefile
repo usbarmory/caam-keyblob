@@ -10,6 +10,8 @@ else
 KERNEL_SRC ?= /lib/modules/$(shell uname -r)/build
 GO ?= go
 
+.PHONY: caam_tool
+
 all:
 	make -C ${KERNEL_SRC} M=$(CURDIR) modules
 
