@@ -24,6 +24,7 @@
 #define SNVS_HPSR_REG  0x020cc014
 #define SNVS_HPSR_SSM_STATE_MASK     0xf00
 #define SNVS_HPSR_SSM_STATE_TRUSTED  0xd00
+#define SNVS_HPSR_SSM_STATE_SECURE   0xf00
 
 /**
  * struct kb_device - the metadata of the caam key blob device node
@@ -642,7 +643,7 @@ static int caam_keyblob_probe(struct platform_device *pdev)
 {
 	int err;
 	void __iomem *page;
-	u32 state, offset;
+	u32 ssm_state, offset;
 
 	dev_dbg(&pdev->dev, "caam_keylob: %s enter\n", __func__);
 	kb_dev = kb_device_create();
@@ -656,12 +657,14 @@ static int caam_keyblob_probe(struct platform_device *pdev)
 
 	page = ioremap(SNVS_HPSR_REG & ~(SZ_4K - 1), SZ_4K);
 	offset = SNVS_HPSR_REG & (SZ_4K - 1);
-	state = __raw_readl(page + offset);
+	ssm_state = (__raw_readl(page + offset) & SNVS_HPSR_SSM_STATE_MASK);
 
-	if ((state & SNVS_HPSR_SSM_STATE_MASK) == SNVS_HPSR_SSM_STATE_TRUSTED) {
+	if (ssm_state == SNVS_HPSR_SSM_STATE_TRUSTED) {
+		printk(KERN_INFO "caam_keyblob: Trusted State detected\n");
+	} else if (ssm_state == SNVS_HPSR_SSM_STATE_SECURE) {
 		printk(KERN_INFO "caam_keyblob: Secure State detected\n");
 	} else {
-		printk(KERN_NOTICE "caam_keyblob: WARNING - not in Secure State, Non-volatile test key in effect\n");
+		printk(KERN_NOTICE "caam_keyblob: WARNING - not in Trusted or Secure State, Non-volatile test key in effect\n");
 	}
 
 	return 0;

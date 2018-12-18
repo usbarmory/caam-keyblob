@@ -60,18 +60,18 @@ Operation
 SoC, is used. The secure operation of the CAAM and SNVS, in production
 deployments, should always be paired with Secure Boot activation.
 
-The `caam_keyblob` module, when not in Secure State, issues the following
-warning at load time:
+The `caam_keyblob` module, when not in Trusted or Secure State, issues the
+following warning at load time:
 
 ```
-caam_keyblob: WARNING - not in Secure State, Non-volatile test key in effect
+caam_keyblob: WARNING - not in Trusted or Secure State, Non-volatile test key in effect
 ```
 
-When Secure State is correctly detected the module issues following message at
-load time:
+When Trusted or Secure State is correctly detected the module issues a log
+message at load time:
 
 ```
-caam_keyblob: Secure State detected
+caam_keyblob: Trusted State detected
 ```
 
 The following IOCTL is defined for character device `/dev/caam_kb`:
