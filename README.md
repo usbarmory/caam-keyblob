@@ -67,8 +67,8 @@ following warning at load time:
 caam_keyblob: WARNING - not in Trusted or Secure State, Non-volatile test key in effect
 ```
 
-When Trusted or Secure State is correctly detected the module issues a log
-message at load time:
+When in Trusted or Secure State the module issues a corresponding log message
+at load time:
 
 ```
 caam_keyblob: Trusted State detected
