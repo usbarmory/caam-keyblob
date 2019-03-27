@@ -52,12 +52,24 @@ Once installed the resulting module can be loaded in the traditional manner:
 modprobe caam_keyblob
 ```
 
-The probing of the CAAM depends on its the Device Tree (dts) inclusion in
-running Linux kernel, already present in Linux kernel versions >= 4.18
+The probing of the driver depends on the CAAM Device Tree (dts) inclusion in
+the running Linux kernel, versions >= 4.18
 [dts](https://github.com/torvalds/linux/blob/v4.20/arch/arm/boot/dts/imx6ul.dtsi#L770-L798)
-files, which include the CAAM device in SoCs that support it (e.g. i.MX6UL).
+already include the base CAAM device entries for SoCs that support it (e.g. i.MX6UL).
 
-Additionally the Linux CAAM Job Ring driver (`caam_jr`) must be enabled
+The base CAAM device entries must however be complemented with the following
+section, required by this driver:
+```
+	caam_keyblob: caam-keyblob {
+		compatible = "fsl,sec-v4.0-keyblob";
+		status = "okay";
+	};
+```
+
+An example of all required entries can be found in the USB armory Mk II
+[dts](https://github.com/inversepath/usbarmory/blob/master/software/kernel_conf/imx6ul-pico/imx6ul-pico-hobbit-caam.dts).
+
+Finally the Linux CAAM Job Ring driver (`caam_jr`) must be enabled
 (`CRYPTO_DEV_FSL_CAAM_JR`) in the running kernel configuration, either built-in
 or as a module, as it is a required dependency for `caam_keyblob`.
 
