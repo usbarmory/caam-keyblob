@@ -20,6 +20,8 @@
 // (HAB) is enabled, otherwise a Non-volatile Test Key (NVTK), identical for
 // each SoC, is used. The secure operation of the CAAM and SNVS, in production
 // deployments, should always be paired with Secure Boot activation.
+//
+// +build linux
 
 package main
 
