@@ -22,9 +22,9 @@
 #define MAX_RAWKEY_LEN (MAX_KEYBLOB_LEN - BLOB_OVERHEAD)
 
 #define SNVS_HPSR_REG  0x020cc014
-#define SNVS_HPSR_SSM_STATE_MASK     0xf00
-#define SNVS_HPSR_SSM_STATE_TRUSTED  0xd00
-#define SNVS_HPSR_SSM_STATE_SECURE   0xf00
+#define SNVS_HPSR_SSM_STATE_MASK    0xf00
+#define SNVS_HPSR_SSM_STATE_TRUSTED 0xd00
+#define SNVS_HPSR_SSM_STATE_SECURE  0xf00
 
 /**
  * struct kb_device - the metadata of the caam key blob device node
@@ -664,7 +664,7 @@ static int caam_keyblob_probe(struct platform_device *pdev)
 	} else if (ssm_state == SNVS_HPSR_SSM_STATE_SECURE) {
 		printk(KERN_INFO "caam_keyblob: Secure State detected\n");
 	} else {
-		printk(KERN_NOTICE "caam_keyblob: WARNING - not in Trusted or Secure State, Non-volatile test key in effect\n");
+		printk(KERN_NOTICE "caam_keyblob: WARNING - not in Trusted or Secure State, Non-volatile Test Key in effect\n");
 	}
 
 	return 0;
