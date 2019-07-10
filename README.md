@@ -67,7 +67,7 @@ section, required by this driver:
 ```
 
 An example of all required entries can be found in the USB armory Mk II
-[dts](https://github.com/inversepath/usbarmory/blob/master/software/kernel_conf/imx6ul-pico/imx6ul-pico-hobbit-caam.dts).
+[dts](https://github.com/inversepath/usbarmory/blob/master/software/kernel_conf/mark-two/imx6ul-usbarmory.dts).
 
 Finally the Linux CAAM Job Ring driver (`caam_jr`) must be enabled
 (`CRYPTO_DEV_FSL_CAAM_JR`) in the running kernel configuration, either built-in
