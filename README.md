@@ -40,7 +40,7 @@ when cross compiling adjust `ARCH` and `CROSS_COMPILE` variables accordingly.
 ```
 # the Makefile attempts to locate your Linux kernel source tree, if this fails
 # it can be passed with a Makefile variable (e.g. `make KERNEL_SRC=path`)
-git clone https://github.com/inversepath/caam_keyblob
+git clone https://github.com/f-secure-foundry/caam_keyblob
 cd caam_keyblob
 make
 make modules_install
@@ -67,7 +67,7 @@ section, required by this driver:
 ```
 
 An example of all required entries can be found in the USB armory Mk II
-[dts](https://github.com/inversepath/usbarmory/blob/master/software/kernel_conf/mark-two/imx6ul-usbarmory.dts).
+[dts](https://github.com/f-secure-foundry/usbarmory/blob/master/software/kernel_conf/mark-two/imx6ul-usbarmory.dts).
 
 Finally the Linux CAAM Job Ring driver (`caam_jr`) must be enabled
 (`CRYPTO_DEV_FSL_CAAM_JR`) in the running kernel configuration, either built-in
@@ -104,7 +104,7 @@ ioctl(file, mode, (caam_kb_data *) kb)
 The mode can be either `CAAM_KB_ENCRYPT` or `CAAM_KB_DECRYPT` to respectively
 select AES-256 encryption or decryption with CBC-MAC (CCM). The mode values and
 the `caam_kb_data` structure format are defined in
-[caam_keyblob.h](https://github.com/inversepath/caam-keyblob/blob/master/caam_keyblob.h).
+[caam_keyblob.h](https://github.com/f-secure-foundry/caam-keyblob/blob/master/caam_keyblob.h).
 
 The following steps, all taken internally within the CAAM, describe the
 encryption operation:
@@ -132,19 +132,19 @@ internal RNG, satisfying the need to avoid key re-use.
 The maximum data size is 65487 bytes, this limitation is consistent with the
 fact that such data typically consists of an encryption key.
 
-The [INTERLOCK](https://github.com/inversepath/interlock) file encryption
+The [INTERLOCK](https://github.com/f-secure-foundry/interlock) file encryption
 front-end supports the CAAM through this driver, providing a Go userspace
 implementation reference.
 
 A standalone Go tool, for encryption and decryption, is also available in the
-[caam_keyblob.go](https://github.com/inversepath/caam-keyblob/blob/master/caam_tool.go)
+[caam_keyblob.go](https://github.com/f-secure-foundry/caam-keyblob/blob/master/caam_tool.go)
 file.
 
 License
 =======
 
 NXP Cryptographic Acceleration and Assurance Module (CAAM) - Linux driver
-https://github.com/inversepath/caam-keyblob
+https://github.com/f-secure-foundry/caam-keyblob
 
 Copyright (c) F-Secure Corporation  
 Copyright (c) 2015 Freescale Semiconductor, Inc.
