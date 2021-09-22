@@ -636,6 +636,7 @@ static int kb_device_destroy(struct kb_device *kb_dev)
 
 	return 0;
 }
+
 /*
  * Probe key blob device
  */
