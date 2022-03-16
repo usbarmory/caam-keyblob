@@ -1,5 +1,5 @@
 // NXP Cryptographic Acceleration and Assurance Module (CAAM)
-// https://github.com/f-secure-foundry/caam-keyblob
+// https://github.com/usbarmory/caam-keyblob
 //
 // userspace driver reference example
 //
