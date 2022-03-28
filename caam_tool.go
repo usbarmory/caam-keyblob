@@ -3,7 +3,7 @@
 //
 // userspace driver reference example
 //
-// Copyright (c) F-Secure Corporation
+// Copyright (c) WithSecure Corporation
 //
 // This program is free software: you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free
