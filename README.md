@@ -2,8 +2,9 @@ NXP Cryptographic Acceleration and Assurance Module (CAAM) - Linux driver
 =========================================================================
 
 The NXP Cryptographic Acceleration and Assurance Module (CAAM) is a built-in
-hardware module for NXP i.MX6/i.MX7/i.MX8 SoCs that implements secure RAM and a
-dedicated AES cryptographic engine for encryption/decryption operations.
+hardware module for NXP i.MX, QoriQ and Layerscape SoCs that implements secure
+RAM and a dedicated AES cryptographic engine for encryption/decryption
+operations.
 
 A device specific random 256-bit OTPMK key is fused in each SoC at
 manufacturing time, this key is unreadable and can only be used by the CAAM for
@@ -34,8 +35,8 @@ Based on a driver from Freescale Semiconductor, Inc.
 Compiling
 =========
 
-The following instructions assume compilation on a native armv7 architecture,
-when cross compiling adjust `ARCH` and `CROSS_COMPILE` variables accordingly.
+The following instructions assume compilation on a native architecture, when
+cross compiling adjust `ARCH` and `CROSS_COMPILE` variables accordingly.
 
 ```
 # the Makefile attempts to locate your Linux kernel source tree, if this fails
