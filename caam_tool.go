@@ -118,34 +118,32 @@ func main() {
 
 	switch mode {
 	case CAAM_KB_ENCRYPT:
-		text, err = ioutil.ReadFile(textPath)
-
-		if err != nil {
+		if text, err = ioutil.ReadFile(textPath); err != nil {
 			return
 		}
 
-		if len(text) > MAX_RAWKEY_LEN {
-			log.Fatalf("caam_tool: error, input from %s cannot exceed %d", textPath, MAX_RAWKEY_LEN)
+		if len(text) == 0 || len(text) > MAX_RAWKEY_LEN {
+			log.Fatal("caam_tool: error, invalid input size")
 		}
 
 		kb.TextLen = uint32(len(text))
 		kb.BlobLen = uint32(len(text) + BLOB_OVERHEAD)
+
 		blob = make([]byte, kb.BlobLen)
 
 		log.Printf("caam_tool: encrypting %d bytes from %s", kb.TextLen, textPath)
 	case CAAM_KB_DECRYPT:
-		blob, err = ioutil.ReadFile(blobPath)
-
-		if err != nil {
+		if blob, err = ioutil.ReadFile(blobPath); err != nil {
 			return
 		}
 
-		if len(blob) > MAX_KEYBLOB_LEN {
-			log.Fatalf("caam_tool: error, input from %s cannot exceed %d", textPath, MAX_KEYBLOB_LEN)
+		if len(blob) == 0 || len(blob) > MAX_KEYBLOB_LEN {
+			log.Fatal("caam_tool: error, invalid input size")
 		}
 
 		kb.BlobLen = uint32(len(blob))
 		kb.TextLen = uint32(len(blob) - BLOB_OVERHEAD)
+
 		text = make([]byte, kb.TextLen)
 
 		log.Printf("caam_tool: decrypting %d bytes from %s", kb.BlobLen, blobPath)
@@ -167,34 +165,25 @@ func main() {
 	log.Printf("caam_tool: caam_kb_data %+v", kb)
 	log.Printf("caam_tool: issuing ioctl %x on %s", mode, CAAM_DEV)
 
-	err = ioctl(caam.Fd(), uintptr(mode), uintptr(unsafe.Pointer(kb)))
-
-	if err != nil {
+	if err = ioctl(caam.Fd(), uintptr(mode), uintptr(unsafe.Pointer(kb))); err != nil {
 		return
 	}
-	defer caam.Close()
 
 	switch mode {
 	case CAAM_KB_ENCRYPT:
-		output, err = os.OpenFile(blobPath, os.O_CREATE|os.O_TRUNC|os.O_WRONLY|os.O_EXCL|os.O_SYNC, 0600)
-
-		if err != nil {
+		if output, err = os.OpenFile(blobPath, os.O_CREATE|os.O_TRUNC|os.O_WRONLY|os.O_EXCL|os.O_SYNC, 0600); err != nil {
 			return
 		}
-
-		output.Write(blob)
 
 		log.Printf("caam_tool: encrypted %d bytes to %s", kb.BlobLen, blobPath)
+		output.Write(blob)
 	case CAAM_KB_DECRYPT:
-		output, err = os.OpenFile(textPath, os.O_CREATE|os.O_TRUNC|os.O_WRONLY|os.O_EXCL|os.O_SYNC, 0600)
-
-		if err != nil {
+		if output, err = os.OpenFile(textPath, os.O_CREATE|os.O_TRUNC|os.O_WRONLY|os.O_EXCL|os.O_SYNC, 0600); err != nil {
 			return
 		}
 
-		output.Write(text)
-
 		log.Printf("caam_tool: decrypted %d bytes to %s", kb.TextLen, textPath)
+		output.Write(text)
 	}
 
 	output.Close()
