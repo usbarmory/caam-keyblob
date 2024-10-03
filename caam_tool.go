@@ -28,7 +28,6 @@ package main
 import (
 	"bytes"
 	"flag"
-	"io/ioutil"
 	"log"
 	"os"
 	"syscall"
@@ -118,7 +117,7 @@ func main() {
 
 	switch mode {
 	case CAAM_KB_ENCRYPT:
-		if text, err = ioutil.ReadFile(textPath); err != nil {
+		if text, err = os.ReadFile(textPath); err != nil {
 			return
 		}
 
@@ -133,7 +132,7 @@ func main() {
 
 		log.Printf("caam_tool: encrypting %d bytes from %s", kb.TextLen, textPath)
 	case CAAM_KB_DECRYPT:
-		if blob, err = ioutil.ReadFile(blobPath); err != nil {
+		if blob, err = os.ReadFile(blobPath); err != nil {
 			return
 		}
 
