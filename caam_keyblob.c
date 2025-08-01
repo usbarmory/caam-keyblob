@@ -7,6 +7,7 @@
 #include <linux/of_irq.h>
 #include <linux/of_address.h>
 #include <linux/miscdevice.h>
+#include <linux/platform_device.h>
 
 #include "compat.h"
 #include "regs.h"
@@ -60,7 +61,7 @@ static int gen_mem_decap(struct device *jr_dev, void __user *keyblobbuf,
 		size_t bloblen, void __user *kmodbuf, void __user *outbuf);
 static long kb_ioctl(struct file *file, unsigned int cmd, unsigned long arg);
 static int caam_keyblob_probe(struct platform_device *pdev);
-static int caam_keyblob_remove(struct platform_device *pdev);
+static void caam_keyblob_remove(struct platform_device *pdev);
 
 static int kb_open(struct inode *inode, struct file *file)
 {
@@ -678,10 +679,10 @@ err:
 /*
  * Remove key blob device
  */
-static int caam_keyblob_remove(struct platform_device *pdev)
+static void caam_keyblob_remove(struct platform_device *pdev)
 {
 	kb_device_destroy(kb_dev);
-	return 0;
+	return;
 }
 
 static struct of_device_id caam_keyblob_match[] = {
