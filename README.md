@@ -25,10 +25,10 @@ Authors
 =======
 
 Andrea Barisani  
-andrea.barisani@withsecure.com | andrea@inversepath.com  
+andrea@inversepath.com  
 
 Andrej Rosano  
-andrej.rosano@withsecure.com   | andrej@inversepath.com  
+andrej@inversepath.com  
 
 Based on a driver from Freescale Semiconductor, Inc.
 
@@ -147,7 +147,7 @@ License
 NXP Cryptographic Acceleration and Assurance Module (CAAM) - Linux driver
 https://github.com/usbarmory/caam-keyblob
 
-Copyright (c) WithSecure Corporation  
+Copyright (c) The caam-keblob authors.  
 Copyright (c) 2015 Freescale Semiconductor, Inc.
 
 This program is free software: you can redistribute it and/or modify it under
